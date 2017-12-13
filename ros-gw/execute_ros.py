@@ -12,6 +12,7 @@ import rospy
 from geometry_msgs.msg import *
 import time
 import cPickle
+import bz2
 import sys
 
 
@@ -37,7 +38,7 @@ b64 = sys.argv[2]
 #np = cPickle.dumps(npos).encode("base64").replace("\n","")
 #print np
 #print len(np)
-npos2 = cPickle.loads(b64.decode("base64"))
+npos2 = cPickle.loads(bz2.decompress(b64.decode("base64")))
 print npos2
 pub = rospy.Publisher(topic, type(npos2))
 time.sleep(1)

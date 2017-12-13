@@ -13,6 +13,7 @@ import rospy
 from geometry_msgs.msg import *
 import time
 import cPickle
+import bz2
 from pyserval.client import ServalClient
 
 npos = PoseStamped()
@@ -22,7 +23,7 @@ npos.pose.position.y = 0.4
 npos.pose.orientation.w = 1.0
 topic = "/move_base/simple_goal"
 
-np = cPickle.dumps(npos).encode("base64").replace("\n","")
+np = bz2.compress(cPickle.dumps(npos)).encode("base64").replace("\n","")
 print topic
 print np
 
